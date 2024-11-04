@@ -1,0 +1,34 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+#org: michelletxr
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: node-serverless-proj
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: node-serverless-proj
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+  getData:
+    handler: src/handler.getData
+    events:
+      - httpApi:
+          path: /api
+          method: get
+
+  postData:
+    handler: src/handlers.postData
+    events:
+      - httpApi:
+          path: /api
+          method: post
+
+plugins:
+  - serverless-offline
